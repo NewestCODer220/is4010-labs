@@ -31,129 +31,76 @@ fn main() {
         concat_with_separator(&["hello", "world"], "-")
     );
 }
-
 // ============================================================================
 // PART 1: Basic arithmetic
 // ============================================================================
 
-/// Returns the sum of `a` and `b`.
-///
-/// # Examples
-/// ```
-/// assert_eq!(add(2, 3), 5);
-/// assert_eq!(add(-1, 1), 0);
-/// ```
-fn add(_a: i32, _b: i32) -> i32 {
-    todo!("Implement add")
+pub fn add(a: i32, b: i32) -> i32 {
+    // No semicolon on the final line creates an implicit return
+    a + b
 }
 
-/// Returns the product of `a` and `b`.
-///
-/// # Examples
-/// ```
-/// assert_eq!(multiply(3, 4), 12);
-/// assert_eq!(multiply(0, 99), 0);
-/// ```
-fn multiply(_a: i32, _b: i32) -> i32 {
-    todo!("Implement multiply")
+pub fn multiply(a: i32, b: i32) -> i32 {
+    a * b
 }
 
 // ============================================================================
 // PART 2: Boolean logic
 // ============================================================================
 
-/// Returns `true` if `n` is even, `false` if it is odd.
-///
-/// # Examples
-/// ```
-/// assert!(is_even(4));
-/// assert!(!is_even(7));
-/// ```
-fn is_even(_n: i32) -> bool {
-    todo!("Implement is_even")
+pub fn is_even(n: i32) -> bool {
+    // Returns true if the remainder of division by 2 is exactly 0
+    n % 2 == 0
 }
 
 // ============================================================================
 // PART 3: Comparisons
 // ============================================================================
 
-/// Returns the larger of `a` and `b`.
-/// If they are equal, return either value.
-///
-/// # Examples
-/// ```
-/// assert_eq!(max(3, 9), 9);
-/// assert_eq!(max(5, 5), 5);
-/// ```
-fn max(_a: i32, _b: i32) -> i32 {
-    todo!("Implement max")
+pub fn max(a: i32, b: i32) -> i32 {
+    // Rust's standard library provides a built-in max method for integers
+    a.max(b)
 }
 
 // ============================================================================
 // PART 4: Expressions
 // ============================================================================
 
-/// Returns `n` raised to the power of 2 (n²).
-///
-/// # Examples
-/// ```
-/// assert_eq!(square(5), 25);
-/// assert_eq!(square(0), 0);
-/// ```
-fn square(_n: i32) -> i32 {
-    todo!("Implement square")
+pub fn square(n: i32) -> i32 {
+    n * n
 }
 
 // ============================================================================
 // PART 5: String operations
 // ============================================================================
 
-/// Returns the input string reversed.
-///
-/// # Examples
-/// ```
-/// assert_eq!(reverse_string("hello"), "olleh");
-/// assert_eq!(reverse_string(""), "");
-/// ```
-fn reverse_string(_s: &str) -> String {
-    todo!("Implement reverse_string")
+pub fn reverse_string(s: &str) -> String {
+    // chars() breaks the string into an iterator of characters
+    // rev() reverses the order
+    // collect() gathers them back into a new String
+    s.chars().rev().collect()
 }
 
-/// Joins words with the given separator.
-///
-/// # Examples
-/// ```
-/// assert_eq!(concat_with_separator(&["hello", "world"], "-"), "hello-world");
-/// assert_eq!(concat_with_separator(&[], ","), "");
-/// ```
-fn concat_with_separator(_words: &[&str], _sep: &str) -> String {
-    todo!("Implement concat_with_separator")
+pub fn concat_with_separator(words: &[&str], sep: &str) -> String {
+    // Slices have a built-in join method that perfectly handles this
+    words.join(sep)
 }
 
 // ============================================================================
 // PART 6: Collections and Option
 // ============================================================================
 
-/// Returns the maximum value in the slice, or None if empty.
-///
-/// # Examples
-/// ```
-/// assert_eq!(find_max_in_vec(&[1, 5, 3]), Some(5));
-/// assert_eq!(find_max_in_vec(&[]), None);
-/// ```
-fn find_max_in_vec(_numbers: &[i32]) -> Option<i32> {
-    todo!("Implement find_max_in_vec")
+pub fn find_max_in_vec(numbers: &[i32]) -> Option<i32> {
+    // iter() creates an iterator over references (&i32)
+    // copied() converts those references into actual values (i32)
+    // max() finds the highest value, automatically returning Option::None if empty
+    numbers.iter().copied().max()
 }
 
-/// Returns the count of even numbers in the slice.
-///
-/// # Examples
-/// ```
-/// assert_eq!(count_evens(&[1, 2, 3, 4]), 2);
-/// assert_eq!(count_evens(&[]), 0);
-/// ```
-fn count_evens(_numbers: &[i32]) -> usize {
-    todo!("Implement count_evens")
+pub fn count_evens(numbers: &[i32]) -> usize {
+    // filter() keeps only the items where the closure condition is true
+    // count() tallies how many items made it through the filter
+    numbers.iter().filter(|&&x| x % 2 == 0).count()
 }
 
 // ============================================================================
